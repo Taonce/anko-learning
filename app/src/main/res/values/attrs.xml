@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomCircle">
+        <attr name="startAngle" format="float"/>
+        <attr name="endAngle" format="float"/>
+        <attr name="arcBg" format="integer"/>
+        <attr name="paintWidth" format="float"/>
+    </declare-styleable>
+</resources>
