@@ -2,9 +2,11 @@ package com.taonce.myanko.anko.custom
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.taonce.myanko.R
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.verticalLayout
 
 
 /**
@@ -12,7 +14,6 @@ import org.jetbrains.anko.*
  * Date: 2018/12/29
  * Project: MyToast
  * Desc:
- * Copyright (C) 2018 Aulton. All rights reserved.
  */
 
 class SettingActivity : AppCompatActivity() {

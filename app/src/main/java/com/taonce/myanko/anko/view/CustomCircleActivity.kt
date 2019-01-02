@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
+import android.widget.LinearLayout
 import com.taonce.myanko.anko.custom.customCircle
 import org.jetbrains.anko.*
 
@@ -17,16 +18,21 @@ class CustomCircleActivity : AppCompatActivity() {
 
 class CustomCircleUI : AnkoComponent<CustomCircleActivity> {
 	override fun createView(ui: AnkoContext<CustomCircleActivity>) = with(ui) {
-		relativeLayout {
+		linearLayout {
+			orientation = LinearLayout.VERTICAL
 			gravity = Gravity.CENTER
-			lparams(width = 1000, height = 1000)
-			backgroundColor = Color.parseColor("#99FF99")
-			customCircle {
-				startAngle = 0f
-				endAngle = 270f
-				arcBg = Color.parseColor("#FF9999")
-				paintWidth = 20f
+			lparams(matchParent, matchParent)
+			verticalLayout {
+				lparams(width = dip(200), height = dip(200))
+				backgroundColor = Color.parseColor("#ff9999")
+				customCircle {
+					startAngle = 0f
+					endAngle = 180f
+					arcBg = Color.WHITE
+					paintWidth = 2f
+				}
 			}
+
 		}
 	}
 }

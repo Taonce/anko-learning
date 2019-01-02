@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class ListActivity : AppCompatActivity() {
 
@@ -24,17 +25,19 @@ class ListActivity : AppCompatActivity() {
 }
 
 class ListUI : AnkoComponent<ListActivity> {
-	private var rv: RecyclerView? = null
-	override fun createView(ui: AnkoContext<ListActivity>): View {
-		with(ui) {
-			rv = recyclerView {
+	override fun createView(ui: AnkoContext<ListActivity>) = with(ui) {
+		swipeRefreshLayout {
+			setOnRefreshListener {
+				toast("refresh")
+				isRefreshing = false
+			}
+			recyclerView {
 				layoutManager = LinearLayoutManager(ui.ctx)
 				lparams(width = matchParent, height = matchParent)
 				adapter = MyAdapter(ui.ctx, mutableListOf("1",
 						"2", "3", "4"))
 			}
 		}
-		return rv as View
 	}
 }
 
@@ -68,7 +71,7 @@ class MyAdapter(private val context: Context,
 						backgroundColor = Color.parseColor("#FFF0F5")
 						gravity = Gravity.CENTER
 					}.lparams(width = matchParent, height = dip(50)) {
-						// 设置外边距，
+						// 设置外边距
 						topMargin = dip(10)
 					}
 				}

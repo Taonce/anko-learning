@@ -1,6 +1,5 @@
 package com.taonce.myanko.anko.view
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,38 +8,38 @@ import android.graphics.RectF
 import android.support.annotation.ColorInt
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewManager
-import org.jetbrains.anko.custom.ankoView
 
 
 /**
  * Author: taoyongxiang
  * Date: 2018/12/29
  * Project: MyToast
- * Desc:
- * Copyright (C) 2018 Aulton. All rights reserved.
+ * Desc: 自定义view，在anko的DSL语言中实现
  */
 
 class CustomCircle : View {
 
-	private lateinit var circlePaint: Paint
-	private lateinit var circleRect: RectF
-	private lateinit var rectPaint: Paint
+	private var circlePaint: Paint? = null
+	private var circleRect: RectF? = null
+	private var rectPaint: Paint? = null
+	// 圆弧开始的角度
 	var startAngle: Float = 0f
+	// 圆弧结束的角度
 	var endAngle: Float = 0f
+	// 圆弧的背景颜色
 	@ColorInt
 	var arcBg: Int = 0
 		set(value) {
 			field = value
-			circlePaint.color = value
+			circlePaint?.color = value
 		}
+	// 画笔的宽度
 	var paintWidth: Float = 1f
 		set(value) {
 			field = value
-			circlePaint.strokeWidth = value
-			rectPaint.strokeWidth = value
+			circlePaint?.strokeWidth = value
+			rectPaint?.strokeWidth = value
 		}
-
 
 	constructor(context: Context) : this(context, null)
 	constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -55,15 +54,15 @@ class CustomCircle : View {
 		circlePaint = Paint()
 
 		rectPaint = Paint()
-		rectPaint.color = Color.parseColor("#ff0000")
+		rectPaint?.color = Color.parseColor("#ff0000")
 
 		circleRect = RectF(0F, 0F, 360F, 360F)
 	}
 
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
-		canvas.drawRect(circleRect, rectPaint)
-		canvas.drawArc(circleRect, startAngle, endAngle - startAngle, true, circlePaint)
+		canvas.drawRect(circleRect!!, rectPaint!!)
+		canvas.drawArc(circleRect!!, startAngle, endAngle - startAngle, true, circlePaint!!)
 	}
 }
 

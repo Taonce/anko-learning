@@ -1,7 +1,6 @@
 package com.taonce.myanko
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -13,8 +12,6 @@ import com.android.volley.Response.ErrorListener
 import com.android.volley.Response.Listener
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.taonce.myanko.vm.SampleModel
-import com.taonce.myanko.vm.UserInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,18 +27,14 @@ import java.lang.reflect.Type
 
 class MainActivity : AppCompatActivity() {
 
-
-	val viewModel by lazy { ViewModelProviders.of(this).get(SampleModel::class.java) }
-	private var volleyBt: Button? = null
-
 	@SuppressLint("ResourceType")
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
 		verticalLayout {
-			volleyBt = button("volley") {
+			button("volley") {
 				onClick {
-					Snackbar.make(volleyBt!!, "snack_bar", Snackbar.LENGTH_SHORT).show()
+					Snackbar.make(this@button, "snack_bar", Snackbar.LENGTH_SHORT).show()
 					useVolley()
 				}
 			}
@@ -64,22 +57,6 @@ class MainActivity : AppCompatActivity() {
 			}
 		}
 
-		relativeLayout {
-			textView("title") {
-				id = 1
-			}
-			textView("msg") {
-
-			}.lparams { below(1) }
-		}
-
-		viewModel.profileData.observe(this, Observer { it ->
-			it?.let { userInfo: UserInfo ->
-				volleyBt?.let { button: Button ->
-					button.text = userInfo.name
-				}
-			}
-		})
 	}
 
 	/**
@@ -104,7 +81,6 @@ class MainActivity : AppCompatActivity() {
 					val result = response.body()?.string()
 					GlobalScope.launch(Dispatchers.Main) {
 						toast("request result is $result")
-						viewModel.profileData.value = UserInfo("aulton", 20)
 					}
 				}
 			})
@@ -130,6 +106,9 @@ class MainActivity : AppCompatActivity() {
 		requestQueue.add(request)
 	}
 
+	/**
+	 * 使用Retrofit2进行网络请求，并将结果转换为String类型
+	 */
 	private fun useRetrofit() {
 		val retrofit = Retrofit.Builder()
 				.baseUrl("https://www.baidu.com/")

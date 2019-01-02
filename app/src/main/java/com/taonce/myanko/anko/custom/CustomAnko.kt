@@ -16,13 +16,9 @@ import org.jetbrains.anko.custom.ankoView
  * Author: taoyongxiang
  * Date: 2018/12/29
  * Project: MyToast
- * Desc:
- * Copyright (C) 2018 Aulton. All rights reserved.
+ * Desc: 使用DSL自定义一种anko view
  */
 
-/**
- * 自定义一种anko view
- */
 fun myLinearLayout(viewManager: ViewManager,
 				   itemHeight: Int = 40,
 				   itemMarginTop: Int = 0,

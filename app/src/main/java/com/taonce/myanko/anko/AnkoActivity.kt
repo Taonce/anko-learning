@@ -29,6 +29,7 @@ class AnkoActivity : AppCompatActivity() {
 class MainUI : AnkoComponent<AnkoActivity> {
 	override fun createView(ui: AnkoContext<AnkoActivity>) = with(ui) {
 		verticalLayout {
+			// 这个gravity对应的就是gravity，而在lparams闭包中，gravity对应的是layout_gravity
 			gravity = Gravity.CENTER
 			// 布局的属性params在闭包里面的lparams中设置，但是button、TextView等控件的属性params是在闭包外的lparams设置
 			lparams(matchParent, matchParent)
@@ -46,13 +47,13 @@ class MainUI : AnkoComponent<AnkoActivity> {
 					override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 					}
 				})
-			}.lparams(width = matchParent, height = 200)
+			}.lparams(width = dip(250), height = 200)
 
 			editText {
 				hint = "password"
 				top = 20
 				gravity = Gravity.CENTER
-			}.lparams(width = matchParent, height = 200)
+			}.lparams(width = dip(250), height = 200)
 
 			button("list") {
 				backgroundColor = Color.parseColor("#FF9999")
@@ -66,7 +67,7 @@ class MainUI : AnkoComponent<AnkoActivity> {
 				onLongClick {
 					toast("Long Click")
 				}
-			}.lparams(dip(150), dip(50))
+			}.lparams(dip(250), dip(50))
 
 			button("setting") {
 				backgroundColor = Color.parseColor("#FF7777")
@@ -91,7 +92,6 @@ class MainUI : AnkoComponent<AnkoActivity> {
 			}.lparams(dip(250), dip(50)) {
 				topMargin = dip(16)
 			}
-
 		}
 	}
 }
